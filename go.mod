@@ -1,3 +1,3 @@
-module github.com/bwmarrin/snowflake
+module github.com/mvh97hg/snowflake
 
-go 1.16
+go 1.24.3

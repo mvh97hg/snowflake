@@ -86,7 +86,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/bwmarrin/snowflake"
+	"github.com/mvh97hg/snowflake"
 )
 
 func main() {

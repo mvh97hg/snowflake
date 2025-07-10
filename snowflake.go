@@ -12,9 +12,9 @@ import (
 )
 
 var (
-	// Epoch is set to the twitter snowflake epoch of Nov 04 2010 01:42:54 UTC in milliseconds
+	// Epoch is set to the twitter snowflake epoch of Jul 01 2025 00:00:00 UTC in milliseconds
 	// You may customize this to set a different epoch for your application.
-	Epoch int64 = 1288834974657
+	Epoch int64 = 1751302800000
 
 	// NodeBits holds the number of bits to use for Node
 	// Remember, you have a total 22 bits to share between Node/Step
@@ -25,7 +25,7 @@ var (
 	StepBits uint8 = 12
 
 	// DEPRECATED: the below four variables will be removed in a future release.
-	mu        sync.Mutex
+
 	nodeMax   int64 = -1 ^ (-1 << NodeBits)
 	nodeMask        = nodeMax << StepBits
 	stepMask  int64 = -1 ^ (-1 << StepBits)
@@ -100,17 +100,10 @@ type ID int64
 func NewNode(node int64) (*Node, error) {
 
 	if NodeBits+StepBits > 22 {
-		return nil, errors.New("Remember, you have a total 22 bits to share between Node/Step")
+		return nil, errors.New("remember, you have a total 22 bits to share between Node/Step")
 	}
 	// re-calc in case custom NodeBits or StepBits were set
 	// DEPRECATED: the below block will be removed in a future release.
-	mu.Lock()
-	nodeMax = -1 ^ (-1 << NodeBits)
-	nodeMask = nodeMax << StepBits
-	stepMask = -1 ^ (-1 << StepBits)
-	timeShift = NodeBits + StepBits
-	nodeShift = StepBits
-	mu.Unlock()
 
 	n := Node{}
 	n.node = node

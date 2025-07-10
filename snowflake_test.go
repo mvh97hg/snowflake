@@ -2,7 +2,6 @@ package snowflake
 
 import (
 	"bytes"
-	"reflect"
 	"testing"
 )
 
@@ -359,7 +358,7 @@ func TestUnmarshalJSON(t *testing.T) {
 	for _, tc := range tt {
 		var id ID
 		err := id.UnmarshalJSON([]byte(tc.json))
-		if !reflect.DeepEqual(err, tc.expectedErr) {
+		if (err == nil && tc.expectedErr != nil) || (err != nil && tc.expectedErr == nil) || (err != nil && tc.expectedErr != nil && err.Error() != tc.expectedErr.Error()) {
 			t.Fatalf("Expected to get error '%s' decoding JSON, but got '%s'", tc.expectedErr, err)
 		}
 
